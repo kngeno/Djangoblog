@@ -6,7 +6,7 @@ from django.contrib.sites.models import Site
 from django.contrib.auth.models import User
 import markdown
 import feedparser
-
+import coverage
 # Create your tests here.
 class PostTest(TestCase):
     def test_create_category(self):
