@@ -1,7 +1,15 @@
-from django.contrib import admin
 import models
+from django.contrib import admin
+from django.contrib.auth.models import User
 
+class PostAdmin(admin.ModelAdmin):
+    prepopulated_fields = {"slug": ("title",)}
+    exclude = ('author',)
 
-admin.site.register(models.Post)
+    def save_model(self, request, obj, form, change):
+        obj.author = request.user
+        obj.save()
 
-# Register your models here.
+admin.site.register(models.Category)
+admin.site.register(models.Tag)
+admin.site.register(models.Post, PostAdmin)
